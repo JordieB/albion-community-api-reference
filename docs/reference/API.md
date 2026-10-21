@@ -2880,6 +2880,81 @@ This operation does not require authentication
 
 <h1 id="albion-online-community-api-reference-battles">Battles</h1>
 
+## List battles
+
+`GET /api/gameinfo/battles`
+
+An Americas request on 2026-10-21 UTC returned a JSON array. Requests
+using `sort=recent`, `limit=1` or `2`, and `offset=0` or `1` returned
+populated arrays in the sampled calls. These observations do not establish
+parameter bounds, defaults, requiredness, stable ordering, or pagination
+behavior. The response shape is a limited observation; generated examples
+are illustrative shape diagrams, not captured payloads.
+
+<h3 id="list-battles-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|sort|query|string|false|Observed query input: `recent`. Other accepted values and behavior are unverified.|
+|limit|query|string|false|Observed query input: `1`, `2`. Bounds, defaults, and count behavior are unverified.|
+|offset|query|string|false|Observed query input: `0`, `1`. Bounds, defaults, and pagination behavior are unverified.|
+
+> Example responses
+
+> 200 Response
+
+```json
+[
+  {
+    "id": 0,
+    "startTime": "string",
+    "endTime": "string",
+    "totalFame": 0,
+    "totalKills": 0,
+    "players": {
+      "property1": {},
+      "property2": {}
+    },
+    "guilds": {
+      "property1": {},
+      "property2": {}
+    },
+    "alliances": {
+      "property1": {},
+      "property2": {}
+    }
+  }
+]
+```
+
+<h3 id="list-battles-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|JSON array observed from the Americas host on 2026-10-21 UTC. The sample does not establish a complete or stable server contract.|Inline|
+
+<h3 id="list-battles-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» id|integer|false|none|Optional field seen in the sampled battle objects.|
+|» startTime|string|false|none|Optional field seen in the sampled battle objects.|
+|» endTime|string|false|none|Optional field seen in the sampled battle objects.|
+|» totalFame|integer|false|none|Optional field seen in the sampled battle objects.|
+|» totalKills|integer|false|none|Optional field seen in the sampled battle objects.|
+|» players|object|false|none|Optional map seen in sampled battle objects; keys and complete entry shape are unverified.|
+|»» **additionalProperties**|object|false|none|none|
+|» guilds|object|false|none|Optional map seen in sampled battle objects; keys and complete entry shape are unverified.|
+|»» **additionalProperties**|object|false|none|none|
+|» alliances|object|false|none|Optional map seen in sampled battle objects; keys and complete entry shape are unverified.|
+|»» **additionalProperties**|object|false|none|none|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 ## Get a battle
 
 `GET /api/gameinfo/battles/{battleId}`
@@ -4165,7 +4240,11 @@ This operation does not require authentication
 
 `GET /api/gameinfo/search`
 
-Observed route. Parameters and response shapes describe limited observations, not a complete server contract. Generated response examples are illustrative shape diagrams, not captured payloads.
+An Americas request with `q=Albion` on 2026-10-21 UTC returned ten
+players and ten guilds. Each sampled `Name` contained the query text
+when compared without regard to case. This does not establish result
+completeness, a result limit, or case-sensitivity rules. Generated
+response examples are illustrative shape diagrams, not captured payloads.
 
 <h3 id="search-players-and-guilds-parameters">Parameters</h3>
 
@@ -4175,12 +4254,38 @@ Observed route. Parameters and response shapes describe limited observations, no
 
 > Example responses
 
-> default Response
+> 200 Response
 
 ```json
 {
-  "guilds": [],
-  "players": []
+  "guilds": [
+    {
+      "Id": "string",
+      "Name": "string",
+      "AllianceId": "string",
+      "AllianceName": "string",
+      "KillFame": null,
+      "DeathFame": 0
+    }
+  ],
+  "players": [
+    {
+      "Id": "string",
+      "Name": "string",
+      "GuildId": "string",
+      "GuildName": "string",
+      "AllianceId": "string",
+      "AllianceName": "string",
+      "Avatar": "string",
+      "AvatarRing": "string",
+      "KillFame": 0,
+      "DeathFame": 0,
+      "FameRatio": 0,
+      "totalKills": null,
+      "gvgKills": null,
+      "gvgWon": null
+    }
+  ]
 }
 ```
 
@@ -4188,16 +4293,36 @@ Observed route. Parameters and response shapes describe limited observations, no
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|default|Default|JSON shape observed in samples where the HTTP status was not recorded. This does not assert a particular status.|Inline|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|JSON object observed from the Americas host on 2026-10-21 UTC. The sample does not establish a complete or stable server contract.|Inline|
 
 <h3 id="search-players-and-guilds-responseschema">Response Schema</h3>
 
-Status Code **default**
+Status Code **200**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» guilds|array|false|none|Optional field seen in an observed sample; server contract unverified.|
-|» players|array|false|none|Optional field seen in an observed sample; server contract unverified.|
+|» guilds|[object]|false|none|Optional field seen in an observed sample; server contract unverified.|
+|»» Id|string|false|none|Optional field observed in sampled guilds.|
+|»» Name|string|false|none|Optional field observed in sampled guilds.|
+|»» AllianceId|string|false|none|Optional field observed in sampled guilds.|
+|»» AllianceName|string|false|none|Optional field observed in sampled guilds.|
+|»» KillFame|any|false|none|Optional field observed as null in every sampled guild; other values and their types are unverified.|
+|»» DeathFame|integer|false|none|Optional field observed in sampled guilds.|
+|» players|[object]|false|none|Optional field seen in an observed sample; server contract unverified.|
+|»» Id|string|false|none|Optional field observed in sampled players.|
+|»» Name|string|false|none|Optional field observed in sampled players.|
+|»» GuildId|string|false|none|Optional field observed in sampled players.|
+|»» GuildName|string,null|false|none|Optional field observed as a string or null in sampled players.|
+|»» AllianceId|string|false|none|Optional field observed in sampled players.|
+|»» AllianceName|string,null|false|none|Optional field observed as a string or null in sampled players.|
+|»» Avatar|string|false|none|Optional field observed in sampled players.|
+|»» AvatarRing|string|false|none|Optional field observed in sampled players.|
+|»» KillFame|integer|false|none|Optional field observed in sampled players.|
+|»» DeathFame|integer|false|none|Optional field observed in sampled players.|
+|»» FameRatio|number|false|none|Optional field observed in sampled players.|
+|»» totalKills|any|false|none|Optional field observed as null in every sampled player; other values and their types are unverified.|
+|»» gvgKills|any|false|none|Optional field observed as null in every sampled player; other values and their types are unverified.|
+|»» gvgWon|any|false|none|Optional field observed as null in every sampled player; other values and their types are unverified.|
 
 <aside class="success">
 This operation does not require authentication

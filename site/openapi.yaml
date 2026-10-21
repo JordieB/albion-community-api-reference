@@ -2009,6 +2009,96 @@ paths:
                     description: Optional field seen in an observed sample; server
                       contract unverified.
                 additionalProperties: true
+  "/api/gameinfo/battles":
+    get:
+      tags:
+      - Battles
+      summary: List battles
+      description: |
+        An Americas request on 2026-10-21 UTC returned a JSON array. Requests
+        using `sort=recent`, `limit=1` or `2`, and `offset=0` or `1` returned
+        populated arrays in the sampled calls. These observations do not establish
+        parameter bounds, defaults, requiredness, stable ordering, or pagination
+        behavior. The response shape is a limited observation; generated examples
+        are illustrative shape diagrams, not captured payloads.
+      servers:
+      - url: https://gameinfo.albiononline.com
+      parameters:
+      - name: sort
+        in: query
+        required: false
+        schema:
+          type: string
+        description: 'Observed query input: `recent`. Other accepted values and behavior are unverified.'
+        examples:
+          observedValue:
+            summary: Observed value; other values unverified
+            value: recent
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: string
+        description: 'Observed query input: `1`, `2`. Bounds, defaults, and count behavior are unverified.'
+        examples:
+          observedValue:
+            summary: Observed value; other values unverified
+            value: '1'
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: string
+        description: 'Observed query input: `0`, `1`. Bounds, defaults, and pagination behavior are unverified.'
+        examples:
+          observedValue:
+            summary: Observed value; other values unverified
+            value: '0'
+      responses:
+        '200':
+          description: JSON array observed from the Americas host on 2026-10-21 UTC.
+            The sample does not establish a complete or stable server contract.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      description: Optional field seen in the sampled battle objects.
+                    startTime:
+                      type: string
+                      description: Optional field seen in the sampled battle objects.
+                    endTime:
+                      type: string
+                      description: Optional field seen in the sampled battle objects.
+                    totalFame:
+                      type: integer
+                      description: Optional field seen in the sampled battle objects.
+                    totalKills:
+                      type: integer
+                      description: Optional field seen in the sampled battle objects.
+                    players:
+                      type: object
+                      description: Optional map seen in sampled battle objects; keys and complete entry shape are unverified.
+                      additionalProperties:
+                        type: object
+                        additionalProperties: true
+                    guilds:
+                      type: object
+                      description: Optional map seen in sampled battle objects; keys and complete entry shape are unverified.
+                      additionalProperties:
+                        type: object
+                        additionalProperties: true
+                    alliances:
+                      type: object
+                      description: Optional map seen in sampled battle objects; keys and complete entry shape are unverified.
+                      additionalProperties:
+                        type: object
+                        additionalProperties: true
+                  additionalProperties: true
   "/api/gameinfo/battles/{battleId}":
     get:
       tags:
@@ -4232,9 +4322,12 @@ paths:
       tags:
       - Search
       summary: Search players and guilds
-      description: Observed route. Parameters and response shapes describe limited
-        observations, not a complete server contract. Generated response examples
-        are illustrative shape diagrams, not captured payloads.
+      description: |
+        An Americas request with `q=Albion` on 2026-10-21 UTC returned ten
+        players and ten guilds. Each sampled `Name` contained the query text
+        when compared without regard to case. This does not establish result
+        completeness, a result limit, or case-sensitivity rules. Generated
+        response examples are illustrative shape diagrams, not captured payloads.
       servers:
       - url: https://gameinfo.albiononline.com
       parameters:
@@ -4249,9 +4342,9 @@ paths:
             summary: Replace with your value
             value: "<search text>"
       responses:
-        default:
-          description: JSON shape observed in samples where the HTTP status was not
-            recorded. This does not assert a particular status.
+        '200':
+          description: JSON object observed from the Americas host on 2026-10-21 UTC.
+            The sample does not establish a complete or stable server contract.
           content:
             application/json:
               schema:
@@ -4261,10 +4354,82 @@ paths:
                     type: array
                     description: Optional field seen in an observed sample; server
                       contract unverified.
+                    items:
+                      type: object
+                      properties:
+                        Id:
+                          type: string
+                          description: Optional field observed in sampled guilds.
+                        Name:
+                          type: string
+                          description: Optional field observed in sampled guilds.
+                        AllianceId:
+                          type: string
+                          description: Optional field observed in sampled guilds.
+                        AllianceName:
+                          type: string
+                          description: Optional field observed in sampled guilds.
+                        KillFame:
+                          description: Optional field observed as null in every sampled
+                            guild; other values and their types are unverified.
+                        DeathFame:
+                          type: integer
+                          description: Optional field observed in sampled guilds.
+                      additionalProperties: true
                   players:
                     type: array
                     description: Optional field seen in an observed sample; server
                       contract unverified.
+                    items:
+                      type: object
+                      properties:
+                        Id:
+                          type: string
+                          description: Optional field observed in sampled players.
+                        Name:
+                          type: string
+                          description: Optional field observed in sampled players.
+                        GuildId:
+                          type: string
+                          description: Optional field observed in sampled players.
+                        GuildName:
+                          type:
+                          - string
+                          - 'null'
+                          description: Optional field observed as a string or null in sampled players.
+                        AllianceId:
+                          type: string
+                          description: Optional field observed in sampled players.
+                        AllianceName:
+                          type:
+                          - string
+                          - 'null'
+                          description: Optional field observed as a string or null in sampled players.
+                        Avatar:
+                          type: string
+                          description: Optional field observed in sampled players.
+                        AvatarRing:
+                          type: string
+                          description: Optional field observed in sampled players.
+                        KillFame:
+                          type: integer
+                          description: Optional field observed in sampled players.
+                        DeathFame:
+                          type: integer
+                          description: Optional field observed in sampled players.
+                        FameRatio:
+                          type: number
+                          description: Optional field observed in sampled players.
+                        totalKills:
+                          description: Optional field observed as null in every sampled
+                            player; other values and their types are unverified.
+                        gvgKills:
+                          description: Optional field observed as null in every sampled
+                            player; other values and their types are unverified.
+                        gvgWon:
+                          description: Optional field observed as null in every sampled
+                            player; other values and their types are unverified.
+                      additionalProperties: true
                 additionalProperties: true
   "/characterbuilder/api/builds":
     get:
