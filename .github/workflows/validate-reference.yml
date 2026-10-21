@@ -1,0 +1,27 @@
+name: Validate API reference
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  reference:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Validate OpenAPI structure
+        run: npx --yes @openapitools/openapi-generator-cli@2.42.0 validate -i openapi/albion-community-api.yaml
+      - name: Rebuild published reference
+        run: ./scripts/build.sh
+      - name: Check generated files match source
+        run: git diff --exit-code -- docs/reference/API.md site/openapi.yaml
+      - name: Check release boundary and UI safeguards
+        run: python3 -m unittest discover -s tests -v

@@ -1,0 +1,12 @@
+body{margin:0;background:#fafbfd;color:#1b2b40;font:16px/1.5 system-ui,sans-serif}
+header{padding:1rem 1.5rem;border-bottom:1px solid #ced8e2}
+h1{font-size:1.6rem;margin:.25rem 0}
+header p{margin:.5rem 0}
+a{color:#185b97}
+.swagger-ui .wrapper{max-width:1200px}
+.swagger-ui .opblock-summary{flex-wrap:wrap}
+.swagger-ui .opblock-summary-path{overflow-wrap:anywhere!important;word-break:break-word!important;min-width:0}
+.swagger-ui .parameters-container table{table-layout:fixed;width:100%}
+.swagger-ui .parameters-container td,.swagger-ui .parameters-container th{overflow-wrap:anywhere;word-break:break-word}
+.swagger-ui .microlight{overflow:auto}
+@media(max-width:600px){header{padding:1rem}.swagger-ui .opblock-summary-path{font-size:12px!important}}
