@@ -23,7 +23,10 @@ class PublicReferenceTests(unittest.TestCase):
             Path(".github/workflows/validate-reference.yml"),
             Path(".github/workflows/pages.yml"),
         }
-        actual = {p.relative_to(ROOT) for p in ROOT.rglob("*") if p.is_file() and "__pycache__" not in p.parts}
+        actual = {
+            p.relative_to(ROOT) for p in ROOT.rglob("*")
+            if p.is_file() and not {".git", "__pycache__"}.intersection(p.relative_to(ROOT).parts)
+        }
         self.assertEqual(actual, allowed)
 
     def test_templated_paths_and_clean_reference_metadata(self):
