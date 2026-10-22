@@ -39,3 +39,18 @@ python3 -m unittest discover -s tests -v
 
 To preview the static UI locally, serve this directory with any static-file server and open `site/`. For example, `python3 -m http.server 8000 --bind 127.0.0.1` serves it at `http://127.0.0.1:8000/site/`.
 
+## Sample proposed Gameinfo routes
+
+`scripts/probe_gameinfo.py` is an optional live observation tool. It does not run during tests or the reference build. Run offline checks with `python3 -m unittest discover -s tests -v`. To sample all three Gameinfo regions, create a private evidence directory and explicitly opt in:
+
+```sh
+mkdir -p ../probe-results
+python3 scripts/probe_gameinfo.py --run-live --regions americas europe asia --output ../probe-results/gameinfo.json
+```
+
+The sampler makes sequential GET requests to the exact selected hosts, waits at least one second between requests, uses a 12-second timeout and a 2 MiB response cap, follows no redirects, and makes no retries. It stops requesting a region after two network failures. The output records each sampled URL, UTC time, status, MIME type, bounded shape summary, disposition, and bounded raw response encoded as base64 with a SHA-256 digest for independent review. Keep this evidence outside the publishable release tree, as shown above. The script requires the output directory to exist.
+
+For a smaller sample of three statistics combinations and the unknown-route control, use `--scope statistics --regions europe`. The full run samples documented examples of `type`, `subtype`, `region`, and `range`; a requested value appearing in a URL does not prove the server used it.
+
+An `observed_populated` result means only that one request returned populated JSON with recognizable fields. An empty result records limited status and top-level shape evidence. HTTP errors, unexpected JSON, missing fresh IDs, or network failures leave the route unconfirmed; they do not establish absence. A 200 response to a query does not establish that the server honored that parameter, and sampled values do not establish bounds or stability. Results apply only to the sampled host, URL, and UTC date; authentication behavior and unsampled combinations remain unknown. Do not add a route to the OpenAPI reference solely because a third-party list names it.
+
