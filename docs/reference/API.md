@@ -3,13 +3,13 @@
 <h1 id="albion-online-community-api-reference">Albion Online community API reference v1.0.0</h1>
 
 Unofficial reference for an observed subset of Albion Online web APIs.
-Routes and sample shapes were observed in specific requests; parameter requiredness,
-accepted ranges, response stability, and complete server behavior are unverified.
+Routes and sample shapes were observed in specific dated requests and regions; parameter requiredness,
+accepted ranges, response stability, and complete server behavior are unverified. Regional
+observations are operation-specific; omitted hosts and regions remain unconfirmed.
 
-Base hosts: `https://gameinfo.albiononline.com` serves the gameinfo routes shown
-below, and `https://albiononline.com` serves the Character Builder and comment
-routes. The events list also has two observed regional hosts, shown on that
-operation. Do not infer that every host serves every route.
+Gameinfo operations list their observed regional hosts individually; do not infer
+that every host serves every route. `https://albiononline.com` serves the
+Character Builder and comment routes.
 
 Illustrative request patterns (replace every angle-bracket placeholder with a
 value you choose; these are not ready-to-run requests):
@@ -1912,7 +1912,7 @@ This operation does not require authentication
 
 `GET /api/gameinfo/events`
 
-Observed route. Parameters and response shapes describe limited observations, not a complete server contract. Generated response examples are illustrative shape diagrams, not captured payloads.
+Dated, region-specific observations only. Meaningful HTTP 200 samples were observed from the Europe and Asia hosts on 2026-10-27; an older Americas sample remains historical evidence. The 2026-10-27 Americas request timed out, so its result is inconclusive. Query behavior and availability on omitted hosts remain unverified. Generated response examples are illustrative, not captured payloads.
 
 <h3 id="list-events-parameters">Parameters</h3>
 
@@ -2543,7 +2543,7 @@ This operation does not require authentication
 
 `GET /api/gameinfo/events/{eventId}`
 
-Observed route. Parameters and response shapes describe limited observations, not a complete server contract. Generated response examples are illustrative shape diagrams, not captured payloads.
+Observed route. Parameters and response shapes describe limited observations, not a complete server contract. Generated response examples are illustrative shape diagrams, not captured payloads. On 2026-10-27, meaningful HTTP 200 samples were also observed on the Americas, Europe and Asia gameinfo hosts. Generated response examples are illustrative, not captured payloads.
 
 <h3 id="get-an-event-parameters">Parameters</h3>
 
@@ -2730,7 +2730,7 @@ This operation does not require authentication
 
 `GET /api/gameinfo/events/killfame`
 
-Observed route. Parameters and response shapes describe limited observations, not a complete server contract. Generated response examples are illustrative shape diagrams, not captured payloads.
+Observed route. Parameters and response shapes describe limited observations, not a complete server contract. Generated response examples are illustrative shape diagrams, not captured payloads. On 2026-10-27, meaningful HTTP 200 samples were also observed on the Americas, Europe and Asia gameinfo hosts. Generated response examples are illustrative, not captured payloads.
 
 <h3 id="kill-fame-rankings-parameters">Parameters</h3>
 
@@ -2822,13 +2822,55 @@ Status Code **default**
 This operation does not require authentication
 </aside>
 
+## List events for a battle
+
+`GET /api/gameinfo/events/battle/{battleId}`
+
+Observed HTTP 200 on 2026-10-27 from the Americas, Europe and Asia gameinfo hosts. The request returned a sampled event array with offset=0 and limit=2. Other regions are unconfirmed, not necessarily unsupported. Query values are sampled requests only; accepted parameters, requiredness, defaults, bounds and paging behavior are unverified. Path identifiers are string placeholders for URL templating; their formats are unverified. Generated response examples are illustrative shape diagrams, not captured payloads. This path is distinct from the literal /battle/{battleId}; corrected-query requests to that other path were inconclusive.
+
+<h3 id="list-events-for-a-battle-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|battleId|path|string|true|Required by URL templating; identifier format unverified.|
+
+> Example responses
+
+> 200 Response
+
+```json
+[
+  {
+    "EventId": 0
+  }
+]
+```
+
+<h3 id="list-events-for-a-battle-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|HTTP 200 observed for the sampled request. Properties are optional observations; this is not a complete or stable contract.|Inline|
+
+<h3 id="list-events-for-a-battle-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» EventId|number|false|none|Optional field observed in a sample; type and continued presence are unverified.|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 <h1 id="albion-online-community-api-reference-alliances">Alliances</h1>
 
 ## Get an alliance
 
 `GET /api/gameinfo/alliances/{allianceId}`
 
-Observed route. Parameters and response shapes describe limited observations, not a complete server contract. Generated response examples are illustrative shape diagrams, not captured payloads.
+Observed route. Parameters and response shapes describe limited observations, not a complete server contract. Generated response examples are illustrative shape diagrams, not captured payloads. On 2026-10-27, meaningful HTTP 200 samples were also observed on the Americas, Europe and Asia gameinfo hosts. Generated response examples are illustrative, not captured payloads.
 
 <h3 id="get-an-alliance-parameters">Parameters</h3>
 
@@ -2884,12 +2926,7 @@ This operation does not require authentication
 
 `GET /api/gameinfo/battles`
 
-An Americas request on 2026-10-21 UTC returned a JSON array. Requests
-using `sort=recent`, `limit=1` or `2`, and `offset=0` or `1` returned
-populated arrays in the sampled calls. These observations do not establish
-parameter bounds, defaults, requiredness, stable ordering, or pagination
-behavior. The response shape is a limited observation; generated examples
-are illustrative shape diagrams, not captured payloads.
+| An Americas request on 2026-10-21 UTC returned a JSON array. Requests using `sort=recent`, `limit=1` or `2`, and `offset=0` or `1` returned populated arrays in the sampled calls. These observations do not establish parameter bounds, defaults, requiredness, stable ordering, or pagination behavior. The response shape is a limited observation; generated examples are illustrative shape diagrams, not captured payloads. On 2026-10-27, meaningful HTTP 200 samples were also observed on the Americas, Europe and Asia gameinfo hosts. Generated response examples are illustrative, not captured payloads.
 
 <h3 id="list-battles-parameters">Parameters</h3>
 
@@ -2959,7 +2996,7 @@ This operation does not require authentication
 
 `GET /api/gameinfo/battles/{battleId}`
 
-Observed route. Parameters and response shapes describe limited observations, not a complete server contract. Generated response examples are illustrative shape diagrams, not captured payloads.
+Observed route. Parameters and response shapes describe limited observations, not a complete server contract. Generated response examples are illustrative shape diagrams, not captured payloads. On 2026-10-27, meaningful HTTP 200 samples were also observed on the Americas, Europe and Asia gameinfo hosts. Generated response examples are illustrative, not captured payloads.
 
 <h3 id="get-a-battle-parameters">Parameters</h3>
 
@@ -3102,7 +3139,7 @@ This operation does not require authentication
 
 `GET /api/gameinfo/guilds/{guildId}`
 
-Observed route. Parameters and response shapes describe limited observations, not a complete server contract. Generated response examples are illustrative shape diagrams, not captured payloads.
+Observed route. Parameters and response shapes describe limited observations, not a complete server contract. Generated response examples are illustrative shape diagrams, not captured payloads. On 2026-10-27, meaningful HTTP 200 samples were also observed on the Americas, Europe and Asia gameinfo hosts. Generated response examples are illustrative, not captured payloads.
 
 <h3 id="get-a-guild-parameters">Parameters</h3>
 
@@ -3259,13 +3296,143 @@ Status Code **default**
 This operation does not require authentication
 </aside>
 
+## List guild members
+
+`GET /api/gameinfo/guilds/{guildId}/members`
+
+Observed HTTP 200 on 2026-10-27 from the Americas, Europe and Asia gameinfo hosts. The request returned a sampled member array. Other regions are unconfirmed, not necessarily unsupported. Query values are sampled requests only; accepted parameters, requiredness, defaults, bounds and paging behavior are unverified. Path identifiers are string placeholders for URL templating; their formats are unverified. Generated response examples are illustrative shape diagrams, not captured payloads.
+
+<h3 id="list-guild-members-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|guildId|path|string|true|Required by URL templating; identifier format unverified.|
+
+> Example responses
+
+> 200 Response
+
+```json
+[
+  {
+    "Id": "string"
+  }
+]
+```
+
+<h3 id="list-guild-members-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|HTTP 200 observed for the sampled request. Properties are optional observations; this is not a complete or stable contract.|Inline|
+
+<h3 id="list-guild-members-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» Id|string|false|none|Optional field observed in a sample; type and continued presence are unverified.|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## Get guild data
+
+`GET /api/gameinfo/guilds/{guildId}/data`
+
+Observed HTTP 200 on 2026-10-27 from the Americas, Europe and Asia gameinfo hosts. The request returned a sampled object with guild, overall, topPlayers and basic sections. Other regions are unconfirmed, not necessarily unsupported. Query values are sampled requests only; accepted parameters, requiredness, defaults, bounds and paging behavior are unverified. Path identifiers are string placeholders for URL templating; their formats are unverified. Generated response examples are illustrative shape diagrams, not captured payloads.
+
+<h3 id="get-guild-data-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|guildId|path|string|true|Required by URL templating; identifier format unverified.|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "guild": {},
+  "overall": {},
+  "topPlayers": [],
+  "basic": {}
+}
+```
+
+<h3 id="get-guild-data-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|HTTP 200 observed for the sampled request. Properties are optional observations; this is not a complete or stable contract.|Inline|
+
+<h3 id="get-guild-data-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» guild|object|false|none|Optional sampled section; members and structure unverified.|
+|» overall|object|false|none|Optional sampled section; members and structure unverified.|
+|» topPlayers|array|false|none|Optional sampled section; element shape unverified.|
+|» basic|object|false|none|Optional sampled section; members and structure unverified.|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## List guild top events
+
+`GET /api/gameinfo/guilds/{guildId}/top`
+
+Observed HTTP 200 on 2026-10-27 from the Americas, Europe and Asia gameinfo hosts. The request returned a sampled event array with limit=5. Other regions are unconfirmed, not necessarily unsupported. Query values are sampled requests only; accepted parameters, requiredness, defaults, bounds and paging behavior are unverified. Path identifiers are string placeholders for URL templating; their formats are unverified. Generated response examples are illustrative shape diagrams, not captured payloads.
+
+<h3 id="list-guild-top-events-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|guildId|path|string|true|Required by URL templating; identifier format unverified.|
+
+> Example responses
+
+> 200 Response
+
+```json
+[
+  {
+    "EventId": 0
+  }
+]
+```
+
+<h3 id="list-guild-top-events-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|HTTP 200 observed for the sampled request. Properties are optional observations; this is not a complete or stable contract.|Inline|
+
+<h3 id="list-guild-top-events-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» EventId|number|false|none|Optional field observed in a sample; type and continued presence are unverified.|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 <h1 id="albion-online-community-api-reference-items">Items</h1>
 
 ## Get item data
 
 `GET /api/gameinfo/items/{itemId}/data`
 
-Observed route. Parameters and response shapes describe limited observations, not a complete server contract. Generated response examples are illustrative shape diagrams, not captured payloads.
+Observed route. Parameters and response shapes describe limited observations, not a complete server contract. Generated response examples are illustrative shape diagrams, not captured payloads. On 2026-10-27, meaningful HTTP 200 samples were also observed on the Americas, Europe and Asia gameinfo hosts. Generated response examples are illustrative, not captured payloads.
 
 <h3 id="get-item-data-parameters">Parameters</h3>
 
@@ -3817,7 +3984,7 @@ This operation does not require authentication
 
 `GET /api/gameinfo/items/_weaponCategories`
 
-Observed route. Parameters and response shapes describe limited observations, not a complete server contract. Generated response examples are illustrative shape diagrams, not captured payloads.
+Observed route. Parameters and response shapes describe limited observations, not a complete server contract. Generated response examples are illustrative shape diagrams, not captured payloads. On 2026-10-27, meaningful HTTP 200 samples were also observed on the Americas, Europe and Asia gameinfo hosts. Generated response examples are illustrative, not captured payloads.
 
 > Example responses
 
@@ -3854,6 +4021,60 @@ Status Code **default**
 |---|---|---|---|---|
 |» id|string|false|none|Optional field seen in an observed sample; server contract unverified.|
 |» name|string|false|none|Optional field seen in an observed sample; server contract unverified.|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## Get item category tree
+
+`GET /api/gameinfo/items/_itemCategoryTree`
+
+Observed HTTP 200 on 2026-10-27 from the Americas, Europe and Asia gameinfo hosts. The request returned sampled category objects. Other regions are unconfirmed, not necessarily unsupported. Query values are sampled requests only; accepted parameters, requiredness, defaults, bounds and paging behavior are unverified. Path identifiers are string placeholders for URL templating; their formats are unverified. Generated response examples are illustrative shape diagrams, not captured payloads. The per-item variant /items/{itemId}/_itemCategoryTree returned repeated controlled 404 responses for the tested item in all three regions; this does not establish failure for every item ID.
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "head": {},
+  "mainhand": {},
+  "potion": {},
+  "armor": {},
+  "bag": {},
+  "mount": {},
+  "shoes": {},
+  "cape": {},
+  "food": {},
+  "offhand": {}
+}
+```
+
+<h3 id="get-item-category-tree-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|HTTP 200 observed for the sampled request. Properties are optional observations; this is not a complete or stable contract.|Inline|
+
+<h3 id="get-item-category-tree-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+*Sampled root object map; nested category-map details are illustrative and unverified.*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» head|object|false|none|Optional sampled category map; nested structure unverified.|
+|» mainhand|object|false|none|Optional sampled category map; nested structure unverified.|
+|» potion|object|false|none|Optional sampled category map; nested structure unverified.|
+|» armor|object|false|none|Optional sampled category map; nested structure unverified.|
+|» bag|object|false|none|Optional sampled category map; nested structure unverified.|
+|» mount|object|false|none|Optional sampled category map; nested structure unverified.|
+|» shoes|object|false|none|Optional sampled category map; nested structure unverified.|
+|» cape|object|false|none|Optional sampled category map; nested structure unverified.|
+|» food|object|false|none|Optional sampled category map; nested structure unverified.|
+|» offhand|object|false|none|Optional sampled category map; nested structure unverified.|
 
 <aside class="success">
 This operation does not require authentication
@@ -4085,13 +4306,133 @@ Status Code **default**
 This operation does not require authentication
 </aside>
 
+## List crystal matches
+
+`GET /api/gameinfo/matches/crystal`
+
+Observed HTTP 200 on 2026-10-27 from the Americas gameinfo host. The request returned sampled match records with limit=2 and offset=0. Other regions are unconfirmed, not necessarily unsupported. Query values are sampled requests only; accepted parameters, requiredness, defaults, bounds and paging behavior are unverified. Path identifiers are string placeholders for URL templating; their formats are unverified. Generated response examples are illustrative shape diagrams, not captured payloads.
+
+> Example responses
+
+> 200 Response
+
+```json
+[
+  {
+    "MatchId": "string",
+    "matchType": "string",
+    "category": "string",
+    "startTime": "string",
+    "winner": 0
+  }
+]
+```
+
+<h3 id="list-crystal-matches-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|HTTP 200 observed for the sampled request. Properties are optional observations; this is not a complete or stable contract.|Inline|
+
+<h3 id="list-crystal-matches-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» MatchId|string|false|none|Optional sampled match identifier; format unverified.|
+|» matchType|string|false|none|Optional sampled match field; continued presence is unverified.|
+|» category|string|false|none|Optional sampled match field; continued presence is unverified.|
+|» startTime|string|false|none|Optional sampled match field; format and continued presence are unverified.|
+|» winner|integer|false|none|Optional sampled match field; value semantics are unverified.|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## Get a crystal match
+
+`GET /api/gameinfo/matches/crystal/{matchId}`
+
+Observed HTTP 200 on 2026-10-27 from the Americas gameinfo host. The request returned a sampled match object matching MatchId from same-region list. Other regions are unconfirmed, not necessarily unsupported. Query values are sampled requests only; accepted parameters, requiredness, defaults, bounds and paging behavior are unverified. Path identifiers are string placeholders for URL templating; their formats are unverified. Generated response examples are illustrative shape diagrams, not captured payloads. Europe and Asia detail availability was not established because no valid regional MatchId values were available from the sampled lists. Existing /matches/crystalleague operations are distinct observed routes.
+
+<h3 id="get-a-crystal-match-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|matchId|path|string|true|Required by URL templating; identifier format unverified.|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "MatchId": "string",
+  "matchType": "string",
+  "category": "string",
+  "startTime": "string",
+  "winner": 0,
+  "team1Guild": {},
+  "team1Tickets": 0,
+  "team1Territory": {},
+  "team1Results": {},
+  "team1Timeline": [],
+  "team1LeaderId": null,
+  "team2Guild": {},
+  "team2Tickets": 0,
+  "team2Territory": {},
+  "team2Results": {},
+  "team2Timeline": [],
+  "team2LeaderId": null,
+  "crystalLeagueLevel": null,
+  "ttl": "string"
+}
+```
+
+<h3 id="get-a-crystal-match-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|HTTP 200 observed for the sampled request. Properties are optional observations; this is not a complete or stable contract.|Inline|
+
+<h3 id="get-a-crystal-match-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» MatchId|string|false|none|Optional sampled match identifier; format unverified.|
+|» matchType|string|false|none|Optional sampled field; continued presence unverified.|
+|» category|string|false|none|Optional sampled field; continued presence unverified.|
+|» startTime|string|false|none|Optional sampled field; format unverified.|
+|» winner|integer|false|none|Optional sampled field; value semantics unverified.|
+|» team1Guild|object|false|none|Optional sampled team object; structure unverified.|
+|» team1Tickets|integer|false|none|Optional sampled field; value semantics unverified.|
+|» team1Territory|object|false|none|Optional sampled team object; structure unverified.|
+|» team1Results|object|false|none|Optional sampled team object; structure unverified.|
+|» team1Timeline|array|false|none|Optional sampled team field; element shape unverified.|
+|» team1LeaderId|null|false|none|Field was null in the sampled response; other values and types are unverified.|
+|» team2Guild|object|false|none|Optional sampled team object; structure unverified.|
+|» team2Tickets|integer|false|none|Optional sampled field; value semantics unverified.|
+|» team2Territory|object|false|none|Optional sampled team object; structure unverified.|
+|» team2Results|object|false|none|Optional sampled team object; structure unverified.|
+|» team2Timeline|array|false|none|Optional sampled team field; element shape unverified.|
+|» team2LeaderId|null|false|none|Field was null in the sampled response; other values and types are unverified.|
+|» crystalLeagueLevel|null|false|none|Field was null in the sampled response; other values and types are unverified.|
+|» ttl|string|false|none|Optional sampled field; format unverified.|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 <h1 id="albion-online-community-api-reference-players">Players</h1>
 
 ## Get a player
 
 `GET /api/gameinfo/players/{playerId}`
 
-Observed route. Parameters and response shapes describe limited observations, not a complete server contract. Generated response examples are illustrative shape diagrams, not captured payloads.
+Observed route. Parameters and response shapes describe limited observations, not a complete server contract. Generated response examples are illustrative shape diagrams, not captured payloads. On 2026-10-27, meaningful HTTP 200 samples were also observed on the Americas, Europe and Asia gameinfo hosts. Generated response examples are illustrative, not captured payloads.
 
 <h3 id="get-a-player-parameters">Parameters</h3>
 
@@ -4197,7 +4538,7 @@ This operation does not require authentication
 
 `GET /api/gameinfo/players/statistics`
 
-Observed route. Parameters and response shapes describe limited observations, not a complete server contract. Generated response examples are illustrative shape diagrams, not captured payloads.
+Existing sampled operation and qualified inputs are retained. The 2026-10-27 regional samples did not establish meaningful availability or guarantee region, filter, paging, or range behavior.
 
 <h3 id="player-statistics-parameters">Parameters</h3>
 
@@ -4234,17 +4575,97 @@ Observed route. Parameters and response shapes describe limited observations, no
 This operation does not require authentication
 </aside>
 
+## List player deaths
+
+`GET /api/gameinfo/players/{playerId}/deaths`
+
+Observed HTTP 200 on 2026-10-27 from the Europe and Asia gameinfo hosts. The request returned a sampled event array. Other regions are unconfirmed, not necessarily unsupported. Query values are sampled requests only; accepted parameters, requiredness, defaults, bounds and paging behavior are unverified. Path identifiers are string placeholders for URL templating; their formats are unverified. Generated response examples are illustrative shape diagrams, not captured payloads.
+
+<h3 id="list-player-deaths-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|playerId|path|string|true|Required by URL templating; identifier format unverified.|
+
+> Example responses
+
+> 200 Response
+
+```json
+[
+  {
+    "EventId": 0
+  }
+]
+```
+
+<h3 id="list-player-deaths-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|HTTP 200 observed for the sampled request. Properties are optional observations; this is not a complete or stable contract.|Inline|
+
+<h3 id="list-player-deaths-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» EventId|number|false|none|Optional field observed in a sample; type and continued presence are unverified.|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## List player kills
+
+`GET /api/gameinfo/players/{playerId}/kills`
+
+Observed HTTP 200 on 2026-10-27 from the Europe and Asia gameinfo hosts. The request returned a sampled event array. Other regions are unconfirmed, not necessarily unsupported. Query values are sampled requests only; accepted parameters, requiredness, defaults, bounds and paging behavior are unverified. Path identifiers are string placeholders for URL templating; their formats are unverified. Generated response examples are illustrative shape diagrams, not captured payloads.
+
+<h3 id="list-player-kills-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|playerId|path|string|true|Required by URL templating; identifier format unverified.|
+
+> Example responses
+
+> 200 Response
+
+```json
+[
+  {
+    "EventId": 0
+  }
+]
+```
+
+<h3 id="list-player-kills-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|HTTP 200 observed for the sampled request. Properties are optional observations; this is not a complete or stable contract.|Inline|
+
+<h3 id="list-player-kills-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» EventId|number|false|none|Optional field observed in a sample; type and continued presence are unverified.|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 <h1 id="albion-online-community-api-reference-search">Search</h1>
 
 ## Search players and guilds
 
 `GET /api/gameinfo/search`
 
-An Americas request with `q=Albion` on 2026-10-21 UTC returned ten
-players and ten guilds. Each sampled `Name` contained the query text
-when compared without regard to case. This does not establish result
-completeness, a result limit, or case-sensitivity rules. Generated
-response examples are illustrative shape diagrams, not captured payloads.
+| An Americas request with `q=Albion` on 2026-10-21 UTC returned ten players and ten guilds. Each sampled `Name` contained the query text when compared without regard to case. This does not establish result completeness, a result limit, or case-sensitivity rules. Generated response examples are illustrative shape diagrams, not captured payloads. On 2026-10-27, meaningful HTTP 200 samples were also observed on the Americas, Europe and Asia gameinfo hosts; sampled queries do not establish a complete contract. Generated response examples are illustrative, not captured payloads.
 
 <h3 id="search-players-and-guilds-parameters">Parameters</h3>
 
@@ -4323,6 +4744,98 @@ Status Code **200**
 |»» totalKills|any|false|none|Optional field observed as null in every sampled player; other values and their types are unverified.|
 |»» gvgKills|any|false|none|Optional field observed as null in every sampled player; other values and their types are unverified.|
 |»» gvgWon|any|false|none|Optional field observed as null in every sampled player; other values and their types are unverified.|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+<h1 id="albion-online-community-api-reference-guild-matches">Guild Matches</h1>
+
+## List past guild matches
+
+`GET /api/gameinfo/guildmatches/past`
+
+Observed HTTP 200 on 2026-10-27 from the Americas gameinfo host. The request returned sampled match records with limit=2 and offset=0. Other regions are unconfirmed, not necessarily unsupported. Query values are sampled requests only; accepted parameters, requiredness, defaults, bounds and paging behavior are unverified. Path identifiers are string placeholders for URL templating; their formats are unverified. Generated response examples are illustrative shape diagrams, not captured payloads.
+
+> Example responses
+
+> 200 Response
+
+```json
+[
+  {
+    "MatchId": "string",
+    "Attacker": {},
+    "Defender": {}
+  }
+]
+```
+
+<h3 id="list-past-guild-matches-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|HTTP 200 observed for the sampled request. Properties are optional observations; this is not a complete or stable contract.|Inline|
+
+<h3 id="list-past-guild-matches-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» MatchId|string|false|none|Optional sampled match identifier; format unverified.|
+|» Attacker|object|false|none|Optional sampled match section; structure unverified.|
+|» Defender|object|false|none|Optional sampled match section; structure unverified.|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## Get a guild match
+
+`GET /api/gameinfo/guildmatches/{matchId}`
+
+Observed HTTP 200 on 2026-10-27 from the Americas gameinfo host. The request returned a sampled object matching MatchId from same-region past list. Other regions are unconfirmed, not necessarily unsupported. Query values are sampled requests only; accepted parameters, requiredness, defaults, bounds and paging behavior are unverified. Path identifiers are string placeholders for URL templating; their formats are unverified. Generated response examples are illustrative shape diagrams, not captured payloads. Europe and Asia detail availability was not established because no valid regional MatchId values were available from the sampled lists.
+
+<h3 id="get-a-guild-match-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|matchId|path|string|true|Required by URL templating; identifier format unverified.|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "MatchId": "string",
+  "MatchType": "string",
+  "StartTime": "string",
+  "Status": 0,
+  "Attacker": {},
+  "Defender": {}
+}
+```
+
+<h3 id="get-a-guild-match-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|HTTP 200 observed for the sampled request. Properties are optional observations; this is not a complete or stable contract.|Inline|
+
+<h3 id="get-a-guild-match-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» MatchId|string|false|none|Optional sampled match identifier; format unverified.|
+|» MatchType|string|false|none|Optional sampled match field; continued presence is unverified.|
+|» StartTime|string|false|none|Optional sampled match field; format and continued presence are unverified.|
+|» Status|integer|false|none|Optional sampled match field; value semantics are unverified.|
+|» Attacker|object|false|none|Optional sampled match section; structure unverified.|
+|» Defender|object|false|none|Optional sampled match section; structure unverified.|
 
 <aside class="success">
 This operation does not require authentication
