@@ -5,13 +5,13 @@ info:
   version: 1.0.0
   description: |
     Unofficial reference for an observed subset of Albion Online web APIs.
-    Routes and sample shapes were observed in specific requests; parameter requiredness,
-    accepted ranges, response stability, and complete server behavior are unverified.
+    Routes and sample shapes were observed in specific dated requests and regions; parameter requiredness,
+    accepted ranges, response stability, and complete server behavior are unverified. Regional
+    observations are operation-specific; omitted hosts and regions remain unconfirmed.
 
-    Base hosts: `https://gameinfo.albiononline.com` serves the gameinfo routes shown
-    below, and `https://albiononline.com` serves the Character Builder and comment
-    routes. The events list also has two observed regional hosts, shown on that
-    operation. Do not infer that every host serves every route.
+    Gameinfo operations list their observed regional hosts individually; do not infer
+    that every host serves every route. `https://albiononline.com` serves the
+    Character Builder and comment routes.
 
     Illustrative request patterns (replace every angle-bracket placeholder with a
     value you choose; these are not ready-to-run requests):
@@ -1582,9 +1582,8 @@ paths:
       tags:
       - Events
       summary: List events
-      description: Observed route. Parameters and response shapes describe limited
-        observations, not a complete server contract. Generated response examples
-        are illustrative shape diagrams, not captured payloads.
+      description: |
+        Dated, region-specific observations only. Meaningful HTTP 200 samples were observed from the Europe and Asia hosts on 2026-10-27; an older Americas sample remains historical evidence. The 2026-10-27 Americas request timed out, so its result is inconclusive. Query behavior and availability on omitted hosts remain unverified. Generated response examples are illustrative, not captured payloads.
       servers:
       - url: https://gameinfo-ams.albiononline.com
       - url: https://gameinfo-sgp.albiononline.com
@@ -1951,11 +1950,12 @@ paths:
       tags:
       - Alliances
       summary: Get an alliance
-      description: Observed route. Parameters and response shapes describe limited
-        observations, not a complete server contract. Generated response examples
-        are illustrative shape diagrams, not captured payloads.
+      description: |
+        Observed route. Parameters and response shapes describe limited observations, not a complete server contract. Generated response examples are illustrative shape diagrams, not captured payloads. On 2026-10-27, meaningful HTTP 200 samples were also observed on the Americas, Europe and Asia gameinfo hosts. Generated response examples are illustrative, not captured payloads.
       servers:
       - url: https://gameinfo.albiononline.com
+      - url: https://gameinfo-ams.albiononline.com
+      - url: https://gameinfo-sgp.albiononline.com
       parameters:
       - name: allianceId
         in: path
@@ -2015,14 +2015,11 @@ paths:
       - Battles
       summary: List battles
       description: |
-        An Americas request on 2026-10-21 UTC returned a JSON array. Requests
-        using `sort=recent`, `limit=1` or `2`, and `offset=0` or `1` returned
-        populated arrays in the sampled calls. These observations do not establish
-        parameter bounds, defaults, requiredness, stable ordering, or pagination
-        behavior. The response shape is a limited observation; generated examples
-        are illustrative shape diagrams, not captured payloads.
+        | An Americas request on 2026-10-21 UTC returned a JSON array. Requests using `sort=recent`, `limit=1` or `2`, and `offset=0` or `1` returned populated arrays in the sampled calls. These observations do not establish parameter bounds, defaults, requiredness, stable ordering, or pagination behavior. The response shape is a limited observation; generated examples are illustrative shape diagrams, not captured payloads. On 2026-10-27, meaningful HTTP 200 samples were also observed on the Americas, Europe and Asia gameinfo hosts. Generated response examples are illustrative, not captured payloads.
       servers:
       - url: https://gameinfo.albiononline.com
+      - url: https://gameinfo-ams.albiononline.com
+      - url: https://gameinfo-sgp.albiononline.com
       parameters:
       - name: sort
         in: query
@@ -2104,11 +2101,12 @@ paths:
       tags:
       - Battles
       summary: Get a battle
-      description: Observed route. Parameters and response shapes describe limited
-        observations, not a complete server contract. Generated response examples
-        are illustrative shape diagrams, not captured payloads.
+      description: |
+        Observed route. Parameters and response shapes describe limited observations, not a complete server contract. Generated response examples are illustrative shape diagrams, not captured payloads. On 2026-10-27, meaningful HTTP 200 samples were also observed on the Americas, Europe and Asia gameinfo hosts. Generated response examples are illustrative, not captured payloads.
       servers:
       - url: https://gameinfo.albiononline.com
+      - url: https://gameinfo-ams.albiononline.com
+      - url: https://gameinfo-sgp.albiononline.com
       parameters:
       - name: battleId
         in: path
@@ -2275,11 +2273,12 @@ paths:
       tags:
       - Events
       summary: Get an event
-      description: Observed route. Parameters and response shapes describe limited
-        observations, not a complete server contract. Generated response examples
-        are illustrative shape diagrams, not captured payloads.
+      description: |
+        Observed route. Parameters and response shapes describe limited observations, not a complete server contract. Generated response examples are illustrative shape diagrams, not captured payloads. On 2026-10-27, meaningful HTTP 200 samples were also observed on the Americas, Europe and Asia gameinfo hosts. Generated response examples are illustrative, not captured payloads.
       servers:
       - url: https://gameinfo.albiononline.com
+      - url: https://gameinfo-ams.albiononline.com
+      - url: https://gameinfo-sgp.albiononline.com
       parameters:
       - name: eventId
         in: path
@@ -2627,11 +2626,12 @@ paths:
       tags:
       - Events
       summary: Kill fame rankings
-      description: Observed route. Parameters and response shapes describe limited
-        observations, not a complete server contract. Generated response examples
-        are illustrative shape diagrams, not captured payloads.
+      description: |
+        Observed route. Parameters and response shapes describe limited observations, not a complete server contract. Generated response examples are illustrative shape diagrams, not captured payloads. On 2026-10-27, meaningful HTTP 200 samples were also observed on the Americas, Europe and Asia gameinfo hosts. Generated response examples are illustrative, not captured payloads.
       servers:
       - url: https://gameinfo.albiononline.com
+      - url: https://gameinfo-ams.albiononline.com
+      - url: https://gameinfo-sgp.albiononline.com
       parameters:
       - name: limit
         in: query
@@ -2826,11 +2826,12 @@ paths:
       tags:
       - Guilds
       summary: Get a guild
-      description: Observed route. Parameters and response shapes describe limited
-        observations, not a complete server contract. Generated response examples
-        are illustrative shape diagrams, not captured payloads.
+      description: |
+        Observed route. Parameters and response shapes describe limited observations, not a complete server contract. Generated response examples are illustrative shape diagrams, not captured payloads. On 2026-10-27, meaningful HTTP 200 samples were also observed on the Americas, Europe and Asia gameinfo hosts. Generated response examples are illustrative, not captured payloads.
       servers:
       - url: https://gameinfo.albiononline.com
+      - url: https://gameinfo-ams.albiononline.com
+      - url: https://gameinfo-sgp.albiononline.com
       parameters:
       - name: guildId
         in: path
@@ -3096,11 +3097,12 @@ paths:
       tags:
       - Items
       summary: Get item data
-      description: Observed route. Parameters and response shapes describe limited
-        observations, not a complete server contract. Generated response examples
-        are illustrative shape diagrams, not captured payloads.
+      description: |
+        Observed route. Parameters and response shapes describe limited observations, not a complete server contract. Generated response examples are illustrative shape diagrams, not captured payloads. On 2026-10-27, meaningful HTTP 200 samples were also observed on the Americas, Europe and Asia gameinfo hosts. Generated response examples are illustrative, not captured payloads.
       servers:
       - url: https://gameinfo.albiononline.com
+      - url: https://gameinfo-ams.albiononline.com
+      - url: https://gameinfo-sgp.albiononline.com
       parameters:
       - name: itemId
         in: path
@@ -3705,11 +3707,12 @@ paths:
       tags:
       - Items
       summary: Weapon categories
-      description: Observed route. Parameters and response shapes describe limited
-        observations, not a complete server contract. Generated response examples
-        are illustrative shape diagrams, not captured payloads.
+      description: |
+        Observed route. Parameters and response shapes describe limited observations, not a complete server contract. Generated response examples are illustrative shape diagrams, not captured payloads. On 2026-10-27, meaningful HTTP 200 samples were also observed on the Americas, Europe and Asia gameinfo hosts. Generated response examples are illustrative, not captured payloads.
       servers:
       - url: https://gameinfo.albiononline.com
+      - url: https://gameinfo-ams.albiononline.com
+      - url: https://gameinfo-sgp.albiononline.com
       responses:
         default:
           description: JSON shape observed in samples where the HTTP status was not
@@ -4077,11 +4080,12 @@ paths:
       tags:
       - Players
       summary: Get a player
-      description: Observed route. Parameters and response shapes describe limited
-        observations, not a complete server contract. Generated response examples
-        are illustrative shape diagrams, not captured payloads.
+      description: |
+        Observed route. Parameters and response shapes describe limited observations, not a complete server contract. Generated response examples are illustrative shape diagrams, not captured payloads. On 2026-10-27, meaningful HTTP 200 samples were also observed on the Americas, Europe and Asia gameinfo hosts. Generated response examples are illustrative, not captured payloads.
       servers:
       - url: https://gameinfo.albiononline.com
+      - url: https://gameinfo-ams.albiononline.com
+      - url: https://gameinfo-sgp.albiononline.com
       parameters:
       - name: playerId
         in: path
@@ -4210,9 +4214,8 @@ paths:
       tags:
       - Players
       summary: Player statistics
-      description: Observed route. Parameters and response shapes describe limited
-        observations, not a complete server contract. Generated response examples
-        are illustrative shape diagrams, not captured payloads.
+      description: |
+        Existing sampled operation and qualified inputs are retained. The 2026-10-27 regional samples did not establish meaningful availability or guarantee region, filter, paging, or range behavior.
       servers:
       - url: https://gameinfo.albiononline.com
       parameters:
@@ -4323,13 +4326,11 @@ paths:
       - Search
       summary: Search players and guilds
       description: |
-        An Americas request with `q=Albion` on 2026-10-21 UTC returned ten
-        players and ten guilds. Each sampled `Name` contained the query text
-        when compared without regard to case. This does not establish result
-        completeness, a result limit, or case-sensitivity rules. Generated
-        response examples are illustrative shape diagrams, not captured payloads.
+        | An Americas request with `q=Albion` on 2026-10-21 UTC returned ten players and ten guilds. Each sampled `Name` contained the query text when compared without regard to case. This does not establish result completeness, a result limit, or case-sensitivity rules. Generated response examples are illustrative shape diagrams, not captured payloads. On 2026-10-27, meaningful HTTP 200 samples were also observed on the Americas, Europe and Asia gameinfo hosts; sampled queries do not establish a complete contract. Generated response examples are illustrative, not captured payloads.
       servers:
       - url: https://gameinfo.albiononline.com
+      - url: https://gameinfo-ams.albiononline.com
+      - url: https://gameinfo-sgp.albiononline.com
       parameters:
       - name: q
         in: query
@@ -4494,3 +4495,443 @@ paths:
         '301':
           description: HTTP 301 sampled for this path without the trailing slash.
             The redirect destination is unverified.
+
+  "/api/gameinfo/players/{playerId}/deaths":
+    get:
+      tags:
+      - Players
+      summary: List player deaths
+      description: |
+        Observed HTTP 200 on 2026-10-27 from the Europe and Asia gameinfo hosts. The request returned a sampled event array. Other regions are unconfirmed, not necessarily unsupported. Query values are sampled requests only; accepted parameters, requiredness, defaults, bounds and paging behavior are unverified. Path identifiers are string placeholders for URL templating; their formats are unverified. Generated response examples are illustrative shape diagrams, not captured payloads.
+      servers:
+      - url: https://gameinfo-ams.albiononline.com
+      - url: https://gameinfo-sgp.albiononline.com
+      parameters:
+      - name: playerId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Required by URL templating; identifier format unverified.
+      responses:
+        '200':
+          description: HTTP 200 observed for the sampled request. Properties are optional observations; this is not a complete or stable contract.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    EventId:
+                      type: number
+                      description: Optional field observed in a sample; type and continued presence are unverified.
+                additionalProperties: true
+  "/api/gameinfo/players/{playerId}/kills":
+    get:
+      tags:
+      - Players
+      summary: List player kills
+      description: |
+        Observed HTTP 200 on 2026-10-27 from the Europe and Asia gameinfo hosts. The request returned a sampled event array. Other regions are unconfirmed, not necessarily unsupported. Query values are sampled requests only; accepted parameters, requiredness, defaults, bounds and paging behavior are unverified. Path identifiers are string placeholders for URL templating; their formats are unverified. Generated response examples are illustrative shape diagrams, not captured payloads.
+      servers:
+      - url: https://gameinfo-ams.albiononline.com
+      - url: https://gameinfo-sgp.albiononline.com
+      parameters:
+      - name: playerId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Required by URL templating; identifier format unverified.
+      responses:
+        '200':
+          description: HTTP 200 observed for the sampled request. Properties are optional observations; this is not a complete or stable contract.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    EventId:
+                      type: number
+                      description: Optional field observed in a sample; type and continued presence are unverified.
+                additionalProperties: true
+  "/api/gameinfo/guilds/{guildId}/members":
+    get:
+      tags:
+      - Guilds
+      summary: List guild members
+      description: |
+        Observed HTTP 200 on 2026-10-27 from the Americas, Europe and Asia gameinfo hosts. The request returned a sampled member array. Other regions are unconfirmed, not necessarily unsupported. Query values are sampled requests only; accepted parameters, requiredness, defaults, bounds and paging behavior are unverified. Path identifiers are string placeholders for URL templating; their formats are unverified. Generated response examples are illustrative shape diagrams, not captured payloads.
+      servers:
+      - url: https://gameinfo.albiononline.com
+      - url: https://gameinfo-ams.albiononline.com
+      - url: https://gameinfo-sgp.albiononline.com
+      parameters:
+      - name: guildId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Required by URL templating; identifier format unverified.
+      responses:
+        '200':
+          description: HTTP 200 observed for the sampled request. Properties are optional observations; this is not a complete or stable contract.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    Id:
+                      type: string
+                      description: Optional field observed in a sample; type and continued presence are unverified.
+                additionalProperties: true
+  "/api/gameinfo/guilds/{guildId}/data":
+    get:
+      tags:
+      - Guilds
+      summary: Get guild data
+      description: |
+        Observed HTTP 200 on 2026-10-27 from the Americas, Europe and Asia gameinfo hosts. The request returned a sampled object with guild, overall, topPlayers and basic sections. Other regions are unconfirmed, not necessarily unsupported. Query values are sampled requests only; accepted parameters, requiredness, defaults, bounds and paging behavior are unverified. Path identifiers are string placeholders for URL templating; their formats are unverified. Generated response examples are illustrative shape diagrams, not captured payloads.
+      servers:
+      - url: https://gameinfo.albiononline.com
+      - url: https://gameinfo-ams.albiononline.com
+      - url: https://gameinfo-sgp.albiononline.com
+      parameters:
+      - name: guildId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Required by URL templating; identifier format unverified.
+      responses:
+        '200':
+          description: HTTP 200 observed for the sampled request. Properties are optional observations; this is not a complete or stable contract.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  guild:
+                    type: object
+                    description: Optional sampled section; members and structure unverified.
+                  overall:
+                    type: object
+                    description: Optional sampled section; members and structure unverified.
+                  topPlayers:
+                    type: array
+                    description: Optional sampled section; element shape unverified.
+                  basic:
+                    type: object
+                    description: Optional sampled section; members and structure unverified.
+                additionalProperties: true
+  "/api/gameinfo/guilds/{guildId}/top":
+    get:
+      tags:
+      - Guilds
+      summary: List guild top events
+      description: |
+        Observed HTTP 200 on 2026-10-27 from the Americas, Europe and Asia gameinfo hosts. The request returned a sampled event array with limit=5. Other regions are unconfirmed, not necessarily unsupported. Query values are sampled requests only; accepted parameters, requiredness, defaults, bounds and paging behavior are unverified. Path identifiers are string placeholders for URL templating; their formats are unverified. Generated response examples are illustrative shape diagrams, not captured payloads.
+      servers:
+      - url: https://gameinfo.albiononline.com
+      - url: https://gameinfo-ams.albiononline.com
+      - url: https://gameinfo-sgp.albiononline.com
+      parameters:
+      - name: guildId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Required by URL templating; identifier format unverified.
+      responses:
+        '200':
+          description: HTTP 200 observed for the sampled request. Properties are optional observations; this is not a complete or stable contract.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    EventId:
+                      type: number
+                      description: Optional field observed in a sample; type and continued presence are unverified.
+                additionalProperties: true
+  "/api/gameinfo/events/battle/{battleId}":
+    get:
+      tags:
+      - Events
+      summary: List events for a battle
+      description: |
+        Observed HTTP 200 on 2026-10-27 from the Americas, Europe and Asia gameinfo hosts. The request returned a sampled event array with offset=0 and limit=2. Other regions are unconfirmed, not necessarily unsupported. Query values are sampled requests only; accepted parameters, requiredness, defaults, bounds and paging behavior are unverified. Path identifiers are string placeholders for URL templating; their formats are unverified. Generated response examples are illustrative shape diagrams, not captured payloads. This path is distinct from the literal /battle/{battleId}; corrected-query requests to that other path were inconclusive.
+      servers:
+      - url: https://gameinfo.albiononline.com
+      - url: https://gameinfo-ams.albiononline.com
+      - url: https://gameinfo-sgp.albiononline.com
+      parameters:
+      - name: battleId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Required by URL templating; identifier format unverified.
+      responses:
+        '200':
+          description: HTTP 200 observed for the sampled request. Properties are optional observations; this is not a complete or stable contract.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    EventId:
+                      type: number
+                      description: Optional field observed in a sample; type and continued presence are unverified.
+                additionalProperties: true
+  "/api/gameinfo/items/_itemCategoryTree":
+    get:
+      tags:
+      - Items
+      summary: Get item category tree
+      description: |
+        Observed HTTP 200 on 2026-10-27 from the Americas, Europe and Asia gameinfo hosts. The request returned sampled category objects. Other regions are unconfirmed, not necessarily unsupported. Query values are sampled requests only; accepted parameters, requiredness, defaults, bounds and paging behavior are unverified. Path identifiers are string placeholders for URL templating; their formats are unverified. Generated response examples are illustrative shape diagrams, not captured payloads. The per-item variant /items/{itemId}/_itemCategoryTree returned repeated controlled 404 responses for the tested item in all three regions; this does not establish failure for every item ID.
+      servers:
+      - url: https://gameinfo.albiononline.com
+      - url: https://gameinfo-ams.albiononline.com
+      - url: https://gameinfo-sgp.albiononline.com
+      responses:
+        '200':
+          description: HTTP 200 observed for the sampled request. Properties are optional observations; this is not a complete or stable contract.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Sampled root object map; nested category-map details are illustrative and unverified.
+                properties:
+                  head:
+                    type: object
+                    description: Optional sampled category map; nested structure unverified.
+                  mainhand:
+                    type: object
+                    description: Optional sampled category map; nested structure unverified.
+                  potion:
+                    type: object
+                    description: Optional sampled category map; nested structure unverified.
+                  armor:
+                    type: object
+                    description: Optional sampled category map; nested structure unverified.
+                  bag:
+                    type: object
+                    description: Optional sampled category map; nested structure unverified.
+                  mount:
+                    type: object
+                    description: Optional sampled category map; nested structure unverified.
+                  shoes:
+                    type: object
+                    description: Optional sampled category map; nested structure unverified.
+                  cape:
+                    type: object
+                    description: Optional sampled category map; nested structure unverified.
+                  food:
+                    type: object
+                    description: Optional sampled category map; nested structure unverified.
+                  offhand:
+                    type: object
+                    description: Optional sampled category map; nested structure unverified.
+                additionalProperties: true
+
+  "/api/gameinfo/matches/crystal":
+    get:
+      tags:
+      - Crystal League
+      summary: List crystal matches
+      description: |
+        Observed HTTP 200 on 2026-10-27 from the Americas gameinfo host. The request returned sampled match records with limit=2 and offset=0. Other regions are unconfirmed, not necessarily unsupported. Query values are sampled requests only; accepted parameters, requiredness, defaults, bounds and paging behavior are unverified. Path identifiers are string placeholders for URL templating; their formats are unverified. Generated response examples are illustrative shape diagrams, not captured payloads.
+      servers:
+      - url: https://gameinfo.albiononline.com
+      responses:
+        '200':
+          description: HTTP 200 observed for the sampled request. Properties are optional observations; this is not a complete or stable contract.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    MatchId:
+                      type: string
+                      description: Optional sampled match identifier; format unverified.
+                    matchType:
+                      type: string
+                      description: Optional sampled match field; continued presence is unverified.
+                    category:
+                      type: string
+                      description: Optional sampled match field; continued presence is unverified.
+                    startTime:
+                      type: string
+                      description: Optional sampled match field; format and continued presence are unverified.
+                    winner:
+                      type: integer
+                      description: Optional sampled match field; value semantics are unverified.
+                  additionalProperties: true
+  "/api/gameinfo/matches/crystal/{matchId}":
+    get:
+      tags:
+      - Crystal League
+      summary: Get a crystal match
+      description: |
+        Observed HTTP 200 on 2026-10-27 from the Americas gameinfo host. The request returned a sampled match object matching MatchId from same-region list. Other regions are unconfirmed, not necessarily unsupported. Query values are sampled requests only; accepted parameters, requiredness, defaults, bounds and paging behavior are unverified. Path identifiers are string placeholders for URL templating; their formats are unverified. Generated response examples are illustrative shape diagrams, not captured payloads. Europe and Asia detail availability was not established because no valid regional MatchId values were available from the sampled lists. Existing /matches/crystalleague operations are distinct observed routes.
+      servers:
+      - url: https://gameinfo.albiononline.com
+      parameters:
+      - name: matchId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Required by URL templating; identifier format unverified.
+      responses:
+        '200':
+          description: HTTP 200 observed for the sampled request. Properties are optional observations; this is not a complete or stable contract.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  MatchId:
+                    type: string
+                    description: Optional sampled match identifier; format unverified.
+                  matchType:
+                    type: string
+                    description: Optional sampled field; continued presence unverified.
+                  category:
+                    type: string
+                    description: Optional sampled field; continued presence unverified.
+                  startTime:
+                    type: string
+                    description: Optional sampled field; format unverified.
+                  winner:
+                    type: integer
+                    description: Optional sampled field; value semantics unverified.
+                  team1Guild:
+                    type: object
+                    description: Optional sampled team object; structure unverified.
+                  team1Tickets:
+                    type: integer
+                    description: Optional sampled field; value semantics unverified.
+                  team1Territory:
+                    type: object
+                    description: Optional sampled team object; structure unverified.
+                  team1Results:
+                    type: object
+                    description: Optional sampled team object; structure unverified.
+                  team1Timeline:
+                    type: array
+                    description: Optional sampled team field; element shape unverified.
+                  team1LeaderId:
+                    type: 'null'
+                    description: Field was null in the sampled response; other values and types are unverified.
+                  team2Guild:
+                    type: object
+                    description: Optional sampled team object; structure unverified.
+                  team2Tickets:
+                    type: integer
+                    description: Optional sampled field; value semantics unverified.
+                  team2Territory:
+                    type: object
+                    description: Optional sampled team object; structure unverified.
+                  team2Results:
+                    type: object
+                    description: Optional sampled team object; structure unverified.
+                  team2Timeline:
+                    type: array
+                    description: Optional sampled team field; element shape unverified.
+                  team2LeaderId:
+                    type: 'null'
+                    description: Field was null in the sampled response; other values and types are unverified.
+                  crystalLeagueLevel:
+                    type: 'null'
+                    description: Field was null in the sampled response; other values and types are unverified.
+                  ttl:
+                    type: string
+                    description: Optional sampled field; format unverified.
+                additionalProperties: true
+
+  "/api/gameinfo/guildmatches/past":
+    get:
+      tags:
+      - Guild Matches
+      summary: List past guild matches
+      description: |
+        Observed HTTP 200 on 2026-10-27 from the Americas gameinfo host. The request returned sampled match records with limit=2 and offset=0. Other regions are unconfirmed, not necessarily unsupported. Query values are sampled requests only; accepted parameters, requiredness, defaults, bounds and paging behavior are unverified. Path identifiers are string placeholders for URL templating; their formats are unverified. Generated response examples are illustrative shape diagrams, not captured payloads.
+      servers:
+      - url: https://gameinfo.albiononline.com
+      responses:
+        '200':
+          description: HTTP 200 observed for the sampled request. Properties are optional observations; this is not a complete or stable contract.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    MatchId:
+                      type: string
+                      description: Optional sampled match identifier; format unverified.
+                    Attacker:
+                      type: object
+                      description: Optional sampled match section; structure unverified.
+                    Defender:
+                      type: object
+                      description: Optional sampled match section; structure unverified.
+                  additionalProperties: true
+  "/api/gameinfo/guildmatches/{matchId}":
+    get:
+      tags:
+      - Guild Matches
+      summary: Get a guild match
+      description: |
+        Observed HTTP 200 on 2026-10-27 from the Americas gameinfo host. The request returned a sampled object matching MatchId from same-region past list. Other regions are unconfirmed, not necessarily unsupported. Query values are sampled requests only; accepted parameters, requiredness, defaults, bounds and paging behavior are unverified. Path identifiers are string placeholders for URL templating; their formats are unverified. Generated response examples are illustrative shape diagrams, not captured payloads. Europe and Asia detail availability was not established because no valid regional MatchId values were available from the sampled lists.
+      servers:
+      - url: https://gameinfo.albiononline.com
+      parameters:
+      - name: matchId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Required by URL templating; identifier format unverified.
+      responses:
+        '200':
+          description: HTTP 200 observed for the sampled request. Properties are optional observations; this is not a complete or stable contract.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  MatchId:
+                    type: string
+                    description: Optional sampled match identifier; format unverified.
+                  MatchType:
+                    type: string
+                    description: Optional sampled match field; continued presence is unverified.
+                  StartTime:
+                    type: string
+                    description: Optional sampled match field; format and continued presence are unverified.
+                  Status:
+                    type: integer
+                    description: Optional sampled match field; value semantics are unverified.
+                  Attacker:
+                    type: object
+                    description: Optional sampled match section; structure unverified.
+                  Defender:
+                    type: object
+                    description: Optional sampled match section; structure unverified.
+                additionalProperties: true

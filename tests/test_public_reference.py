@@ -38,7 +38,7 @@ class PublicReferenceTests(unittest.TestCase):
         spec = (ROOT / "openapi/albion-community-api.yaml").read_text(encoding="utf-8")
         self.assertIsNone(re.search(r"(?m)^\s+x-[A-Za-z0-9_-]+:", spec))
         path_lines = re.findall(r'^  "(/[^"\n]+)":$', spec, re.M)
-        self.assertEqual(len(path_lines), 24)
+        self.assertEqual(len(path_lines), 35)
         for route in path_lines:
             self.assertIsNone(re.search(r"/[0-9]{3,}(?:/|$)", route), route)
             self.assertIsNone(re.search(r"/[A-Za-z0-9_-]{20,}(?:/|$)", route), route)
